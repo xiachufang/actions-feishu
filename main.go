@@ -42,6 +42,7 @@ func (webhook *WebHook) post(body interface{}) {
 	}
 	if err != nil {
 		setOutput(err.Error())
+		return
 	}
 
 	outout, err := ioutil.ReadAll(resp.Body)
