@@ -10,7 +10,7 @@ Actions 配置样例：
 
 ```yaml
     - name: feishu notify
-      uses: xiachufang/actions-feishu@v1
+      uses: xiachufang/actions-feishu@v1.2
       with:
         webhook: ${{ secrets.FEISHU_WEBHOOK }}
         title: I'm title
