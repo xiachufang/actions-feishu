@@ -9,18 +9,22 @@ import (
 	"os"
 )
 
+// Message interface of message
 type Message interface {
 	Send()
 }
 
+// WebHook webhook address
 type WebHook struct {
 	Address string
 }
 
+// set actions output
 func setOutput(output string) {
 	fmt.Println(fmt.Sprintf(`::set-output name=response::%s`, output))
 }
 
+// post to feishu
 func (webhook *WebHook) post(body interface{}) {
 	buf, err := json.Marshal(body)
 	if err != nil {
@@ -48,11 +52,13 @@ func (webhook *WebHook) post(body interface{}) {
 	setOutput(string(outout))
 }
 
+// TextMessage 文本类型消息
 type TextMessage struct {
 	WebHook
 	Text string
 }
 
+// Send implement Message
 func (m *TextMessage) Send() {
 	body := map[string]interface{}{
 		"msg_type": "text",
@@ -63,12 +69,14 @@ func (m *TextMessage) Send() {
 	m.post(body)
 }
 
+// PostMessage Post 类型消息
 type PostMessage struct {
 	WebHook
 	Title   string
 	Content string
 }
 
+// Send implement Message
 func (m *PostMessage) Send() {
 	body := map[string]interface{}{
 		"msg_type": "post",
@@ -93,6 +101,7 @@ type noopMessage struct {}
 
 func (m *noopMessage) Send() {}
 
+// NoopMessage no-op message
 var NoopMessage = &noopMessage{}
 
 func parseInput() Message {
