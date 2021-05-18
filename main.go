@@ -84,10 +84,11 @@ func (m *PostMessage) Send() {
 			"post": map[string]interface{}{
 				"zh_cn": map[string]interface{}{
 					"title": m.Title,
-					"content": []map[string]interface{}{
-						{
+					"content": [][]map[string]interface{}{
+						{{
 							"tag":  "text",
 							"text": m.Content,
+						},
 						},
 					},
 				},
@@ -97,7 +98,7 @@ func (m *PostMessage) Send() {
 	m.post(body)
 }
 
-type noopMessage struct {}
+type noopMessage struct{}
 
 func (m *noopMessage) Send() {}
 
