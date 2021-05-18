@@ -1,0 +1,25 @@
+name: "actions-feishu"
+description: "Send message to FeiShu via github actions"
+author: "xiachufang"
+inputs:
+  webhook:
+    description: "Webhook address"
+    required: true
+  title:
+    description: "Message title"
+    required: false
+    default: "Actions Feishu"
+  content:
+    description: "Message body"
+    required: true
+  message_type:
+    description: "Message type"
+    required: false
+    default: "post"
+outputs:
+  response:
+    description: "response from Feishu"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
