@@ -1,7 +1,6 @@
 name: "actions-feishu"
 description: "Send message to FeiShu via github actions"
 author: "xiachufang"
-icon: "bell"
 inputs:
   webhook:
     description: "Webhook address"
@@ -24,3 +23,7 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+
+branding:
+  icon: bell
+  color: green
