@@ -2,11 +2,15 @@ package main
 
 import (
 	"bytes"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
+
+	"github.com/certifi/gocertifi"
 )
 
 // Message interface of message
@@ -32,7 +36,22 @@ func (webhook *WebHook) post(body interface{}) {
 		return
 	}
 
-	resp, err := http.Post(webhook.Address, "application/json", bytes.NewBuffer(buf))
+	var caCerts *x509.CertPool
+	if rootCAS, err := gocertifi.CACerts(); err == nil {
+		caCerts = rootCAS
+	} else {
+		setOutput("Couldn't load CA Certificates")
+		return
+	}
+
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				RootCAs: caCerts,
+			},
+		},
+	}
+	resp, err := client.Post(webhook.Address, "application/json", bytes.NewBuffer(buf))
 	if resp != nil {
 		defer func() {
 			if err := resp.Body.Close(); err != nil {

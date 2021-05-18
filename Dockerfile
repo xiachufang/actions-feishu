@@ -6,11 +6,10 @@ RUN sed -i "s|//dl-cdn.alpinelinux.org|//${APK_REPO}|g" /etc/apk/repositories; \
 
 WORKDIR /app
 COPY . .
-RUN CGO_ENABLED=0 go build
+RUN CGO_ENABLED=0 go build -o bin/feishu .
 
 FROM scratch
 
-WORKDIR /app
-COPY --from=builder /app/actions-feishu /app/actions-feishu
+COPY --from=builder /app/bin/feishu /app
 
-ENTRYPOINT [ "/app/actions-feishu" ]
+ENTRYPOINT [ "/app" ]
