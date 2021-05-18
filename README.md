@@ -9,15 +9,16 @@
 Actions 配置样例：
 
 ```yaml
-- name: feishu notify
-  uses: xiachufang/actions-feishu
-  with:
-    webhook: ${{ secrets.FEISHU_WEBHOOK }}
-    title: I'm title
-    text: |
-      I'm message body
-      
-      from: ${{ github.repository }}
+    - name: feishu notify
+      uses: xiachufang/actions-feishu@v1
+      with:
+        webhook: ${{ secrets.FEISHU_WEBHOOK }}
+        title: I'm title
+        content: |
+          I'm message body
+
+          from: ${{ github.repository }}
+
 ```
 
 # Configuration
