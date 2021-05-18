@@ -21,7 +21,7 @@ type WebHook struct {
 
 // set actions output
 func setOutput(output string) {
-	fmt.Println(fmt.Sprintf(`::set-output name=response::%s`, output))
+	fmt.Printf(`::set-output name=response::%s\n`, output)
 }
 
 // post to feishu
