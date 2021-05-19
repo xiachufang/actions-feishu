@@ -25,6 +25,6 @@ jobs:
       - uses: ./
         with:
           webhook: ${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}
-          msg_type: "__custom_req__"
+          message_type: "__custom_req__"
           msg_template_path: '.github/feishu_msg_tmpl/example.json'
           msg_template_values: "${{steps.set-template-values.outputs.result}}"

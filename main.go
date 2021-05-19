@@ -121,12 +121,14 @@ func (m *PostMessage) Send() {
 	m.post(body)
 }
 
+// TemplateMessage 用于构造并处理处理模版请求消息的类型,不属于飞书定义的任何消息类型
 type TemplateMessage struct {
 	WebHook
 	TemplatePath   string
 	TemplateValues map[string]interface{}
 }
 
+// TemplateMessage implement Message
 func (m *TemplateMessage) Send() {
 	tmpl, err := template.ParseFiles(m.TemplatePath)
 	if err != nil {
