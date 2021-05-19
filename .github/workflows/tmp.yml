@@ -1,0 +1,21 @@
+name: 'tmp-test'
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+jobs:
+  test_msg_type_post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: feishu notify
+        uses: xiachufang/actions-feishu@v1.2
+        with:
+          webhook: ${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}
+          title: I'm title
+          content: |
+            I'm message body
+            from: ${{ github.repository }}
