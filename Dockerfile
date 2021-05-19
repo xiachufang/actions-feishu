@@ -15,4 +15,5 @@ RUN CGO_ENABLED=0 go build -o bin/feishu .
 
 #COPY --from=builder /app/bin/feishu /app
 
+#ENTRYPOINT [ "/app" ]
 ENTRYPOINT [ "bin/feishu" ]
