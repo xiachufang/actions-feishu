@@ -1,0 +1,30 @@
+name: 'build-test'
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+jobs:
+  test_custom_req_msg_type:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/github-script@v4
+        id: set-template-values
+        with:
+          script: |
+            return JSON.stringify({
+              title: "每日一问",
+              text: "吃了吗?🍚",
+              yes_button_text: "吃了",
+              no_button_text: "没吃",
+            })
+          result-encoding: string
+      - uses: ./
+        with:
+          webhook: ${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}
+          msg_type: "__custom_req__"
+          msg_template_path: '.github/feishu_msg_tmpl/example.json'
+          msg_template_values: "${{steps.set-template-values.outputs.result}}"

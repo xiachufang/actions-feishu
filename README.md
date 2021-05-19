@@ -30,7 +30,9 @@ Actions 配置样例：
 | `webhook`| **true** | webhook address |
 | `title` | **false** | title of message|
 | `content` | **true** | content of message|
-| `message_type`| **false**| message type, optional: `post`, `text`|
+| `message_type`| **false**| message type, optional: `post`, `text`, `__custom__req__`, default: `post`|
+| `msg_template_path`| **false**| message template path, only work when `message_type` is `__custom__req__`|
+| `msg_template_values`| **false**| message template fillings, , only work when `message_type` is `__custom__req__`|
 
 ## Outputs
 

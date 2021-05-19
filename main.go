@@ -7,8 +7,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
+	"text/template"
 
 	"github.com/certifi/gocertifi"
 )
@@ -30,6 +32,7 @@ func setOutput(output string) {
 
 // post to feishu
 func (webhook *WebHook) post(body interface{}) {
+
 	buf, err := json.Marshal(body)
 	if err != nil {
 		setOutput(err.Error())
@@ -118,6 +121,31 @@ func (m *PostMessage) Send() {
 	m.post(body)
 }
 
+type TemplateMessage struct {
+	WebHook
+	TemplatePath   string
+	TemplateValues map[string]interface{}
+}
+
+func (m *TemplateMessage) Send() {
+	tmpl, err := template.ParseFiles(m.TemplatePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var rawData bytes.Buffer
+	err = tmpl.Execute(&rawData, m.TemplateValues)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var body map[string]interface{}
+	err = json.Unmarshal(rawData.Bytes(), &body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	m.post(body)
+}
+
 type noopMessage struct{}
 
 func (m *noopMessage) Send() {}
@@ -145,6 +173,19 @@ func parseInput() Message {
 		return &TextMessage{
 			WebHook: w,
 			Text:    os.Getenv("INPUT_CONTENT"),
+		}
+	case "__custom_req__":
+		rawTemplateValues := os.Getenv("INPUT_MSG_TEMPLATE_VALUES")
+		var templateValues map[string]interface{}
+		err := json.Unmarshal([]byte(rawTemplateValues), &templateValues)
+		if err != nil {
+			log.Fatalf("hint: msg-template-values must be a valid JSON string\n\nReason: %s", err.Error())
+		}
+		templatePath := os.Getenv("INPUT_MSG_TEMPLATE_PATH")
+		return &TemplateMessage{
+			WebHook:        w,
+			TemplatePath:   templatePath,
+			TemplateValues: templateValues,
 		}
 	default:
 		return NoopMessage

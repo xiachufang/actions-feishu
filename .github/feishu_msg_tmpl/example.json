@@ -1,0 +1,49 @@
+{
+  "msg_type": "interactive",
+  "card": {
+    "config": {
+      "wide_screen_mode": true,
+      "enable_forward": true
+    },
+    "elements": [
+      {
+        "tag": "div",
+        "text": {
+          "content": "{{.text}}",
+          "tag": "lark_md"
+        }
+      },
+      {
+        "actions": [
+          {
+            "tag": "button",
+            "text": {
+              "content": "{{.yes_button_text}}",
+              "tag": "lark_md"
+            },
+            "url": "https://www.example.com",
+            "type": "default",
+            "value": {}
+          },
+          {
+            "tag": "button",
+            "text": {
+              "content": "{{.no_button_text}}",
+              "tag": "lark_md"
+            },
+            "url": "https://www.example.com",
+            "type": "default",
+            "value": {}
+          }
+        ],
+        "tag": "action"
+      }
+    ],
+    "header": {
+      "title": {
+        "content": "{{.title}}",
+        "tag": "plain_text"
+      }
+    }
+  }
+}
