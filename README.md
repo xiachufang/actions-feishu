@@ -21,6 +21,8 @@ Actions 配置样例：
 
 ```
 
+更多示范例子见: [test.yml](./.github/workflows/test.yml)
+
 # Configuration
 
 ## Inputs
@@ -33,6 +35,8 @@ Actions 配置样例：
 | `message_type`| **false**| message type, optional: `post`, `text`, `__custom__req__`, default: `post`|
 | `msg_template_path`| **false**| message template path, only work when `message_type` is `__custom__req__`|
 | `msg_template_values`| **false**| message template fillings, , only work when `message_type` is `__custom__req__`|
+
+详细定义见: [action.yml](./action.yml)
 
 ## Outputs
 

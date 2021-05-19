@@ -17,11 +17,11 @@ inputs:
     required: false
     default: "post"
   msg_template_path:
-    description: "Path of message template, use it value when message_type is '__custom_req__'"
+    description: "Path of message template, use it value when message_type is '__template__'"
     required: false
     default: "./github/feishu_msg_tmpl/example.json"
   msg_template_values:
-    description: "A JSON String for fill out template, use it value when message_type is '__custom_req__'"
+    description: "A JSON String for fill out template, use it value when message_type is '__template__'"
     required: false
     default: "{}"
 
