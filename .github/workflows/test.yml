@@ -7,7 +7,20 @@ on:
       - 'releases/*'
 
 jobs:
-  test_custom_req_msg_type:
+  test_msg_type_post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: feishu notify
+        uses: xiachufang/actions-feishu@v1.2
+        with:
+          webhook: ${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}
+          title: I'm title
+          content: |
+            I'm message body
+
+            from: ${{ github.repository }}
+  test_msg_type___template__:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,6 +38,6 @@ jobs:
       - uses: ./
         with:
           webhook: ${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}
-          message_type: "__custom_req__"
+          message_type: "__template__"
           msg_template_path: '.github/feishu_msg_tmpl/example.json'
           msg_template_values: "${{steps.set-template-values.outputs.result}}"
