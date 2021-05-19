@@ -1,7 +1,10 @@
 FROM golang:1.14.4-alpine3.12 as builder
 
+ONBUILD ARG CI
 ARG APK_REPO=mirrors.aliyun.com
-RUN sed -i "s|//dl-cdn.alpinelinux.org|//${APK_REPO}|g" /etc/apk/repositories; \
+RUN if [ ! $CI ];then \
+        sed -i "s|//dl-cdn.alpinelinux.org|//${APK_REPO}|g" /etc/apk/repositories \
+    fi \
     apk add --no-cache make curl git build-base
 
 WORKDIR /app
