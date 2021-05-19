@@ -1,4 +1,5 @@
-FROM golang:1.14.4-alpine3.12 as builder
+FROM golang:1.14.4
+#FROM golang:1.14.4-alpine3.12 as builder
 
 # Dev: pass this to `docker build`
 # --build-arg APK_REPO=mirrors.aliyun.com
@@ -10,8 +11,8 @@ WORKDIR /app
 COPY . .
 RUN CGO_ENABLED=0 go build -o bin/feishu .
 
-FROM scratch
+#FROM scratch
 
-COPY --from=builder /app/bin/feishu /app
+#COPY --from=builder /app/bin/feishu /app
 
-ENTRYPOINT [ "/app" ]
+ENTRYPOINT [ "bin/feishu" ]
