@@ -11,9 +11,8 @@ WORKDIR /app
 COPY . .
 RUN CGO_ENABLED=0 go build -o bin/feishu .
 
-#FROM scratch
+FROM scratch
 
-#COPY --from=builder /app/bin/feishu /app
+COPY --from=builder /app/bin/feishu /app
 
-#ENTRYPOINT [ "/app" ]
-ENTRYPOINT [ "bin/feishu" ]
+ENTRYPOINT [ "/app" ]
