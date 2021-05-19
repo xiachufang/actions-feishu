@@ -181,7 +181,7 @@ func parseInput() Message {
 		var templateValues map[string]interface{}
 		err := json.Unmarshal([]byte(rawTemplateValues), &templateValues)
 		if err != nil {
-			log.Fatalf("hint: msg-template-values must be a valid JSON string\n\nReason: %s", err.Error())
+			log.Fatalf("hint: msg_template_values must be a valid JSON string\n\nReason: %s", err.Error())
 		}
 		templatePath := os.Getenv("INPUT_MSG_TEMPLATE_PATH")
 		return &TemplateMessage{
