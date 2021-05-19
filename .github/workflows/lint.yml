@@ -1,7 +1,6 @@
 ---
 name: Lint
 on:
-  - push
   - pull_request
 jobs:
   # We already run the current golangci-lint in tests, but here we test
@@ -20,44 +19,44 @@ jobs:
     name: Errcheck
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: check
-      uses: grandcolline/golang-github-actions@v1.1.0
-      with:
-        run: errcheck
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@master
+      - name: check
+        uses: grandcolline/golang-github-actions@v1.1.0
+        with:
+          run: errcheck
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: check
-      uses: grandcolline/golang-github-actions@v1.1.0
-      with:
-        run: lint
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@master
+      - name: check
+        uses: grandcolline/golang-github-actions@v1.1.0
+        with:
+          run: lint
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   staticcheck:
     name: StaticCheck
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: check
-      uses: grandcolline/golang-github-actions@v1.1.0
-      with:
-        run: staticcheck
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@master
+      - name: check
+        uses: grandcolline/golang-github-actions@v1.1.0
+        with:
+          run: staticcheck
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   sec:
     name: Sec
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: check
-      uses: grandcolline/golang-github-actions@v1.1.0
-      with:
-        run: sec
-        token: ${{ secrets.GITHUB_TOKEN }}
-        flags: "-exclude=G104"
+      - uses: actions/checkout@master
+      - name: check
+        uses: grandcolline/golang-github-actions@v1.1.0
+        with:
+          run: sec
+          token: ${{ secrets.GITHUB_TOKEN }}
+          flags: "-exclude=G104"
 
