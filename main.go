@@ -128,7 +128,7 @@ type TemplateMessage struct {
 	TemplateValues map[string]interface{}
 }
 
-// TemplateMessage implement Message
+// Send implement Message
 func (m *TemplateMessage) Send() {
 	tmpl, err := template.ParseFiles(m.TemplatePath)
 	if err != nil {
