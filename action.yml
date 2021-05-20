@@ -1,5 +1,5 @@
 name: "actions-feishu"
-description: "Send message to FeiShu via github actions"
+description: "Send message to FeiShu via Github Actions"
 author: "xiachufang"
 inputs:
   webhook:
@@ -16,6 +16,15 @@ inputs:
     description: "Message type"
     required: false
     default: "post"
+  msg_template_path:
+    description: "Path of message template, use it value when message_type is 'template'"
+    required: false
+    default: "./github/feishu_msg_tmpl/example.json"
+  msg_template_values:
+    description: "A JSON String for fill out template, use it value when message_type is 'template'"
+    required: false
+    default: "{}"
+
 outputs:
   response:
     description: "response from Feishu"

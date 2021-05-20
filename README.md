@@ -21,6 +21,8 @@ Actions 配置样例：
 
 ```
 
+更多示范例子见: [test.yml](./.github/workflows/test.yml)
+
 # Configuration
 
 ## Inputs
@@ -30,7 +32,11 @@ Actions 配置样例：
 | `webhook`| **true** | webhook address |
 | `title` | **false** | title of message|
 | `content` | **true** | content of message|
-| `message_type`| **false**| message type, optional: `post`, `text`|
+| `message_type`| **false**| message type, optional: `post`, `text`, `template`, default: `post`|
+| `msg_template_path`| **false**| message template path, only work when `message_type` is `template`|
+| `msg_template_values`| **false**| message template fillings, , only work when `message_type` is `template`|
+
+详细定义见: [action.yml](./action.yml)
 
 ## Outputs
 
