@@ -176,7 +176,7 @@ func parseInput() Message {
 			WebHook: w,
 			Text:    os.Getenv("INPUT_CONTENT"),
 		}
-	case "__template__":
+	case "template":
 		rawTemplateValues := os.Getenv("INPUT_MSG_TEMPLATE_VALUES")
 		var templateValues map[string]interface{}
 		err := json.Unmarshal([]byte(rawTemplateValues), &templateValues)
