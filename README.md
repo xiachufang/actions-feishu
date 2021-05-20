@@ -1,6 +1,7 @@
 # actions-feishu
 
 [![Lint](https://github.com/xiachufang/actions-feishu/actions/workflows/lint.yml/badge.svg)](https://github.com/xiachufang/actions-feishu/actions/workflows/lint.yml)
+[![build-test](https://github.com/xiachufang/actions-feishu/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/xiachufang/actions-feishu/actions/workflows/test.yml)
 
 通过 GitHub Actions 来发送消息到飞书
 
@@ -10,7 +11,7 @@ Actions 配置样例：
 
 ```yaml
     - name: feishu notify
-      uses: xiachufang/actions-feishu@v1.2
+      uses: xiachufang/actions-feishu@v1.3
       with:
         webhook: ${{ secrets.FEISHU_WEBHOOK }}
         title: I'm title
