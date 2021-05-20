@@ -20,7 +20,7 @@ jobs:
             I'm message body
 
             from: ${{ github.repository }}
-  test_msg_type___template__:
+  test_msg_type_template:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -38,6 +38,6 @@ jobs:
       - uses: ./
         with:
           webhook: ${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}
-          message_type: "__template__"
+          message_type: "template"
           msg_template_path: '.github/feishu_msg_tmpl/example.json'
           msg_template_values: "${{steps.set-template-values.outputs.result}}"
