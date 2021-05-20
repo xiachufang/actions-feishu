@@ -1,5 +1,4 @@
-#FROM golang:1.14.4-alpine3.12 as builder
-FROM golang:1.14.4-alpine3.12
+FROM golang:1.14.4-alpine3.12 as builder
 
 # Dev: pass this to `docker build`
 # --build-arg APK_REPO=mirrors.aliyun.com
