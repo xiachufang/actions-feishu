@@ -54,11 +54,12 @@ jobs:
             const serverUrl = "https://github.com";
             const pr_link_text = "${{ github.repository }}#${{ github.event.number }}";
             const pr_link_url = `${serverUrl}/${{ github.repository }}/pull/${{ github.event.number }}`;
+            const workflowStatusUrl = encodeURI(`${pr_link_url}/checks?check_run_id=${{ github.run_id }}`)
             const text = `
             **PR**: [${pr_link_text}](${pr_link_url})
             **TriggerBy**: [${{ github.sha }}](${serverUrl}/${{ github.repository }}/commit/${{ github.sha }})
             **Actor**: ${{ github.actor }}
-            **Workflow Status**: [workflowStatus](${pr_link_url}/checks?check_run_id=${{ github.run_id }})
+            **Workflow Status**: [workflowStatus](${workflowStatusUrl})
             **Job Status**:
             `.trim();
 

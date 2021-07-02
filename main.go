@@ -139,7 +139,7 @@ func (m *TemplateMessage) Send() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(string(rawData.Bytes()))
+	log.Println(rawData.String())
 	var body map[string]interface{}
 	err = json.Unmarshal(rawData.Bytes(), &body)
 	if err != nil {

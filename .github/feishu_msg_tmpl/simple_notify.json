@@ -1,0 +1,24 @@
+{
+    "card": {
+      "config": {
+        "enable_forward": true,
+        "wide_screen_mode": true
+      },
+      "elements": [
+        {
+          "tag": "div",
+          "text": {
+            "content": "{{- .text | js -}}",
+            "tag": "lark_md"
+          }
+        }
+      ],
+      "header": {
+        "title": {
+          "content": "{{.title}}",
+          "tag": "plain_text"
+        }
+      }
+    },
+    "msg_type": "interactive"
+  }
