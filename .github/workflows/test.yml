@@ -40,3 +40,37 @@ jobs:
           message_type: "template"
           msg_template_path: '.github/feishu_msg_tmpl/example.json'
           msg_template_values: "${{steps.set-template-values.outputs.result}}"
+
+  test_msg_type_template_complex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this PR
+        uses: actions/checkout@v2
+      - name: Prepare results
+        uses: actions/github-script@v4
+        id: set-template-values
+        with:
+          script: |
+            const serverUrl = "https://github.com";
+            const pr_link_text = "${{ github.repository }}#${{ github.event.number }}";
+            const pr_link_url = `${serverUrl}/${{ github.repository }}/pull/${{ github.event.number }}`;
+            const text = `
+            **PR**: [${pr_link_text}](${pr_link_url})
+            **TriggerBy**: [${{ github.sha }}](${serverUrl}/${{ github.repository }}/commit/${{ github.sha }})
+            **Actor**: ${{ github.actor }}
+            **Workflow Status**: [workflowStatus](${pr_link_url}/checks?check_run_id=${{ github.run_id }})
+            **Job Status**:
+            `.trim();
+
+            return JSON.stringify({
+              title: "${{ github.repository }}",
+              text: text,
+            });
+          result-encoding: string
+      - name: Send result to Feishu robot
+        uses: ./
+        with:
+          webhook: ${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}
+          message_type: "template"
+          msg_template_path: "./.github/feishu_msg_tmpl/simple_notify.json"
+          msg_template_values: "${{steps.set-template-values.outputs.result}}"
