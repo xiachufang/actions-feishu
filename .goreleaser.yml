@@ -1,0 +1,24 @@
+project_name: actions-feishu
+
+env:
+  - GO111MODULE=on
+
+build:
+  env:
+    - CGO_ENABLED=0
+  main: main.go
+  binary: feishu
+  goos:
+    - darwin
+    - linux
+    - windows
+  goarch:
+    - amd64
+  ignore:
+
+archives:
+  - name_template: "{{.Os}}-{{.Arch}}{{if .Arm}}v{{.Arm}}{{end}}-{{ .ProjectName }}"
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
