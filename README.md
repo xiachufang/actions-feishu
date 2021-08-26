@@ -10,16 +10,16 @@
 Actions 配置样例：
 
 ```yaml
-    - name: feishu notify
-      uses: xiachufang/actions-feishu@v1.3
-      with:
-        webhook: ${{ secrets.FEISHU_WEBHOOK }}
-        title: I'm title
-        content: |
-          I'm message body
-
-          from: ${{ github.repository }}
-
+    - name: Send feishu message
+      env:
+        ACTIONS_FEISHU_TAG: 'v1.3.1' # 替换此变量, 最新见 https://github.com/xiachufang/actions-feishu/releases
+        INPUT_WEBHOOK: "${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}"
+        INPUT_TITLE: "I'm title"
+        INPUT_CONTENT: "I'm message body\nfrom: ${{ github.repository }}"
+      run: |
+        wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ env.ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
+        tar zxf linux-amd64-actions-feishu.tar.gz feishu
+        ./feishu
 ```
 
 更多示范例子见: [test.yml](./.github/workflows/test.yml)
