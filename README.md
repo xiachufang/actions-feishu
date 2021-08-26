@@ -17,7 +17,7 @@ Actions 配置样例：
         INPUT_TITLE: "I'm title"
         INPUT_CONTENT: "I'm message body\nfrom: ${{ github.repository }}"
       run: |
-        wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
+        wget -q https://github.com/xiachufang/actions-feishu/releases/download/${{ env.ACTIONS_FEISHU_TAG }}/linux-amd64-actions-feishu.tar.gz
         tar zxf linux-amd64-actions-feishu.tar.gz feishu
         ./feishu
 ```
