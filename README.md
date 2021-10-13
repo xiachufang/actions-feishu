@@ -14,6 +14,7 @@ Actions 配置样例：
       env:
         ACTIONS_FEISHU_TAG: 'v1.3.1' # 替换此变量, 最新见 https://github.com/xiachufang/actions-feishu/releases
         INPUT_WEBHOOK: "${{ secrets.FEISHU_ROBOT_WEBHOOK_URL }}"
+        INPUT_MESSAGE_TYPE: "post"
         INPUT_TITLE: "I'm title"
         INPUT_CONTENT: "I'm message body\nfrom: ${{ github.repository }}"
       run: |
